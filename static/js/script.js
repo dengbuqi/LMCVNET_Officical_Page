@@ -116,8 +116,6 @@ async function displayOutputImage(results, width, height) {
     canvas.width = width; // Change to your model's input size
     canvas.height = height; // Change to your model's input size
     ctx.putImageData(imageData, 0, 0);
-    canvas.style.width = width; // Change to your model's input size
-    canvas.style.height = height; // Change to your model's input size
     onlinediv.style.width = width;
     onlinediv.style.height = height;
 }
@@ -148,8 +146,6 @@ document.getElementById('imageInput').addEventListener('change', function (event
         const displayHeight = preview.naturalHeight > viewHeight ? viewHeight : preview.naturalHeight;
         preview.style.width = `${displayWidth}px`;
         preview.style.height = `${displayHeight}px`;
-        canvas.style.width = `${displayWidth}px`;
-        canvas.style.height = `${displayHeight}px`;
         slider.style.left = `${displayWidth / 2}px`;
     };
 
@@ -179,7 +175,7 @@ cameraBtn.addEventListener('click', async () => {
     document.getElementById('imageInput').value = '';
     if (!cameraOn) {
         try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            stream = await navigator.mediaDevices.getUserMedia({ video: true });
             cameraStream.srcObject = stream;
             cameraStream.play();
             // cameraStream.style.display = 'block';
@@ -208,7 +204,6 @@ cameraBtn.addEventListener('click', async () => {
             console.error('Error accessing camera: ', error);
         }
     } else {
-        console.log('Stopping camera');
         stream.getTracks()
             .forEach(track => track.stop())
         cameraStream.pause();
