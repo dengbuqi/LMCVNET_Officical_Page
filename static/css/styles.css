@@ -1,0 +1,285 @@
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+h1 {
+    text-align: center;
+    color: #343a40;
+    margin-bottom: 10px;
+}
+
+h1::after {
+    content: "";
+    display: block;
+    width: 90%;
+    height: 4px;
+    background-color: #007bff;
+    margin: 10px auto;
+}
+
+.keywords-container {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Vertically center align items */
+}
+
+.keywords-label {
+    font-size: 20px; /* Increase font size */
+    font-weight: bold; /* Make text bold */
+    color: #333; /* Set a color */
+    margin-right: 10px; /* Add some space between the label and the keywords */
+}
+
+.keywords-list {
+    display: flex; /* Use flexbox for the keywords */
+    flex-wrap: wrap; /* Allow wrapping if needed */
+}
+
+.keyword-item {
+    font-weight: bold;
+    display: inline-block; /* Make items inline */
+    background-color: #5f6b7c; /* Bootstrap primary color */
+    color: white; /* White text color */
+    padding: 5px 10px; /* Padding for keyword items */
+    margin: 0 5px; /* Spacing between keywords */
+    border-radius: 5px; /* Rounded corners for keywords */
+    transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.keyword-item:hover {
+    background-color: #0056b3; /* Darken background on hover */
+    cursor: pointer; /* Change cursor to pointer */
+}
+
+
+.section {
+    margin: 0 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.section h2 {
+    color: #495057;
+    margin-bottom: 10px;
+}
+
+.section p {
+    font-size: 20px;
+    font-weight: bold;
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+.comparison-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    max-width: 1200px;
+    flex-wrap: wrap;
+}
+
+.comparison-slider {
+    position: relative;
+    width: auto;
+    max-width: 50%; 
+    overflow: hidden; 
+}
+
+.comparison-slider h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.img-container {
+    margin: 10px;
+    position: relative;
+    width: 100%;
+}
+
+.img-container img {
+    width: 100%;
+    display: block;
+}
+
+.img-after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    clip-path: inset(0 50% 0 0); 
+    user-select: none;
+}
+
+.img-before{
+    user-select: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: ew-resize;
+    background-color: #2196F3;
+    height: 100%;
+    width: 5px;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.arrow-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(128, 128, 128, 0.7); /* Gray background */
+    border-radius: 50%; /* Make it circular */
+    padding: 5px; /* Space around the arrows */
+    display: flex; /* Use flexbox to align arrows */
+    justify-content: space-between; /* Space out arrows */
+    width: 20px; /* Width of the circular container */
+    height: 20px; /* Height of the circular container */
+    z-index: 15; /* Ensure it's above the images and slider */
+}
+
+.arrow {
+    transform: translateY(3px);
+    color: #ffffff; /* Change arrow color to white */
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.camerabutton {
+    background-color: #ff0000e3; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-items: center;
+}
+
+/* Icon Styles */
+.camerabutton i {
+    margin-right: 8px; /* Space between icon and text */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .slider {
+        width: 3px;
+    }
+
+    .comparison-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .comparison-slider {
+        max-width: 100%;
+    }
+}
+
+.button {
+    display: inline-block;
+    text-align: center;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+
+#imageInput {
+    font-size: 16px;
+    margin: 20px 0;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+#imageInput::-webkit-file-upload-button {
+            background-color: #4a90e2;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+#imageInput::-webkit-file-upload-button:hover {
+    background-color: #357ab8;
+}
+#preview {
+    max-width: 1080px;
+    max-height: 720px;
+    height: auto;
+    width: auto;
+    /* margin: 20px 0; */
+    max-width: 100%;
+    /* border: 2px solid #4a90e2; */
+    /* border-radius: 5px; */
+    display: none; /* Initially hidden */
+    user-select: none;
+}
+
+#enhanceBtn {
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4a90e2;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+#enhanceBtn:hover {
+    background-color: #357ab8;
+}
+
+
+.alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .closebtn:hover {
+    color: black;
+  }
