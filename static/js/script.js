@@ -154,17 +154,20 @@ document.getElementById('imageInput').addEventListener('change', function (event
 document.getElementById('enhanceBtn').addEventListener('click', async function () {
     const session = await loadModel();
     // // Based on the model's input size, you may need to resize the image to a multiple of 8
-
+    const start = new Date().getTime();
     const originalWidth = Math.round(preview.clientWidth / 8) * 8;
     const originalHeight = Math.round(preview.clientHeight / 8) * 8;
     const predictions = await runModel(session, preview, originalWidth, originalHeight);
+    const end = new Date().getTime();
+    const duration = (end - start)/1000; //ms->s
     await displayOutputImage(predictions, originalWidth, originalHeight);
+    testInfo.innerHTML = `Inference time: ${duration.toFixed(2)}s | Image size: ${originalWidth}x${originalHeight}`; 
 });
 
 const cameraBtn = document.getElementById('cameraBtn');
 const cameraStream = document.getElementById('cameraStream');
 const preview = document.getElementById('preview');
-
+const testInfo = document.getElementById('testInfo');
 let cameraOn = false;
 let stream = null;
 
@@ -173,7 +176,8 @@ cameraBtn.addEventListener('click', async () => {
     document.getElementById('imageInput').value = '';
     if (!cameraOn) {
         try {
-            stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            // stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            stream = await getSelectedCameraStream();
             cameraStream.srcObject = stream;
             cameraStream.play();
             // cameraStream.style.display = 'block';
@@ -201,11 +205,15 @@ cameraBtn.addEventListener('click', async () => {
                 const displayHeight = preview.naturalHeight > viewHeight ? viewHeight : preview.naturalHeight;
                 preview.style.width = `${displayWidth}px`;
                 preview.style.height = `${displayHeight}px`;
+                const start = new Date().getTime();
                 const predictions = await runModel(session, preview, originalWidth, originalHeight);
+                const end = new Date().getTime();
+                const duration = (end - start)/1000; //ms->s
                 await displayOutputImage(predictions, originalWidth, originalHeight);
+                testInfo.innerHTML = `Inference time: ${duration.toFixed(2)}s | Image size: ${originalWidth}x${originalHeight}`; 
             };
             // Capture frame every 100ms
-            captureInterval = setInterval(captureFrame, 100);
+            captureInterval = setInterval(captureFrame, 30);
         } catch (error) {
             console.error('Error accessing camera: ', error);
         }
@@ -239,8 +247,50 @@ function createAlert(message) {
     document.getElementById("alertContainer").appendChild(alertDiv);
   }
 
+// 获取可用摄像头设备并填充选择菜单
+async function populateCameraOptions() {
+    try {
+        // 获取所有设备信息
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        // 过滤出视频输入设备（摄像头）
+        const videoDevices = devices.filter(device => device.kind === 'videoinput');
+
+        const select = document.getElementById('cameraSelect');
+
+        // 生成选项列表
+        videoDevices.forEach((device, index) => {
+            const option = document.createElement('option');
+            option.value = device.deviceId;
+            option.text = device.label || `Camera ${index + 1}`;
+            select.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Error enumerating devices:", error);
+    }
+}
+
+// 根据选择的摄像头设备获取视频流
+async function getSelectedCameraStream() {
+    try {
+        const select = document.getElementById('cameraSelect');
+        const deviceId = select.value;
+        
+        // 请求用户选择的摄像头流
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: { deviceId: { exact: deviceId } }
+        });
+        
+        return stream;
+    } catch (error) {
+        console.error("Error accessing the camera:", error);
+    }
+}
+
+// 初始化摄像头选择菜单
+
 window.onload = function () {
     // Initialize both sliders
+    populateCameraOptions();
     setupSlider('slider1');
     setupSlider('slider2');
     setupSlider('slider3');

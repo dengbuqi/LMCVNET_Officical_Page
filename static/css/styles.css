@@ -283,3 +283,21 @@ h1::after {
   .closebtn:hover {
     color: black;
   }
+
+  #cameraSelect {
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 2px solid #007BFF;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    appearance: none;
+    -webkit-appearance: none; /* Safari and Chrome */
+    -moz-appearance: none; /* Firefox */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    cursor: pointer;
+    outline: none;
+}

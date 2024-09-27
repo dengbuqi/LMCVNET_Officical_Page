@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <!-- https://github.com/microsoft/onnxruntime-inference-examples/tree/main/js/importing_onnxruntime-web -->
 
 </head>
+
 <body>
     <div class="container">
         <h1>A Low-cost Deep Learning Model for Real-time Surveillance Vi deo Defogging and Low Light E nhancement</h1>
@@ -26,7 +28,13 @@
         </div>
         <div class="section">
             <h2>Abstract</h2>
-            <p>To achieve better visual quality in tasks such as monitoring and autonomous driving, a variety of image enhancement techniques are applied to camera systems. Among these, low light enhancement and defogging are hot topics in image enhancement research. In this paper, we propose a model that achieves low light image enhancement and defogging with minimal computational cost, while also being capable of real-time high resolution video processing. This model can be widely deployed in cost-effective autonomous driving systems, surveillance equipment, and mobile devices. Our approach aims to improve visual clarity while maintaining cost-efficiency.</p>
+            <p>To achieve better visual quality in tasks such as monitoring and autonomous driving, a variety of image
+                enhancement techniques are applied to camera systems. Among these, low light enhancement and defogging
+                are hot topics in image enhancement research. In this paper, we propose a model that achieves low light
+                image enhancement and defogging with minimal computational cost, while also being capable of real-time
+                high resolution video processing. This model can be widely deployed in cost-effective autonomous driving
+                systems, surveillance equipment, and mobile devices. Our approach aims to improve visual clarity while
+                maintaining cost-efficiency.</p>
         </div>
         <div class="section">
             <div class="comparison-container">
@@ -44,7 +52,7 @@
                         </div>
                     </div>
                 </div>
-        
+
                 <!-- Second Comparison Slider -->
                 <div class="comparison-slider">
                     <h3>Low Light Enhancement Result</h3>
@@ -66,19 +74,21 @@
             <div id="alertContainer"></div>
             <input type="file" id="imageInput" accept="image/*" />
             <button id="enhanceBtn">Enhance Image</button>
-            <button id="cameraBtn" class="camerabutton"> <i class="fas fa-camera"></i>  Camera</button>
+            <button id="cameraBtn" class="camerabutton"> <i class="fas fa-camera"></i> Camera</button>
+            <select id="cameraSelect"></select>
             <video id="cameraStream" style="display: none;"></video>
-            <div id="online" class="comparison-container container_center" >
+            <div id="online" class="comparison-container container_center">
                 <!-- Comparison Slider for Online Test -->
                 <div class="comparison-slider" style="max-width: 100%; width: auto; height: auto;">
+                    <h3 id="testInfo">Inference Time|Image Size</h3>
                     <div class="img-container" style="max-width: 100%; width: auto; height: auto;">
                         <img id="preview" src="" alt="Image preview" />
                         <canvas id="outputcanvas" alt="After" class="img-after" style="width: auto"></canvas>
                         <div class="slider" id="slider3">
-                        <div class="arrow-container">
-                            <div class="arrow left-arrow">&#10094;</div> <!-- Left arrow -->
-                            <div class="arrow right-arrow">&#10095;</div> <!-- Right arrow -->
-                        </div>
+                            <div class="arrow-container">
+                                <div class="arrow left-arrow">&#10094;</div> <!-- Left arrow -->
+                                <div class="arrow right-arrow">&#10095;</div> <!-- Right arrow -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -88,4 +98,5 @@
     <script src="static/js/script.js"></script>
 
 </body>
+
 </html>
