@@ -179,20 +179,7 @@ cameraBtn.addEventListener('click', async () => {
     document.getElementById('imageInput').value = '';
     if (!cameraOn) {
         try {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-                // Do something with the stream
-            } catch (error) {
-                if (error.name === 'NotAllowedError') {
-                    alert("Permission denied: ", error);
-                } else if (error.name === 'NotFoundError') {
-                    alert("No media devices found: ", error);
-                } else if (error.name === 'OverconstrainedError') {
-                    alert("Constraints can't be satisfied: ", error);
-                } else {
-                    alert("Error accessing media devices: ", error);
-                }
-            }
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
             cameraStream.srcObject = stream;
             cameraStream.play();
             // cameraStream.style.display = 'block';
