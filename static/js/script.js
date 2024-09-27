@@ -153,10 +153,8 @@ document.getElementById('imageInput').addEventListener('change', function (event
 
 document.getElementById('enhanceBtn').addEventListener('click', async function () {
     const session = await loadModel();
-    // Based on the model's input size, you may need to resize the image to a multiple of 8
+    // // Based on the model's input size, you may need to resize the image to a multiple of 8
 
-    // const originalWidth = Math.round(img.naturalWidth / 8) * 8;
-    // const originalHeight = Math.round(img.naturalHeight / 8) * 8;
     const originalWidth = Math.round(preview.clientWidth / 8) * 8;
     const originalHeight = Math.round(preview.clientHeight / 8) * 8;
     const predictions = await runModel(session, preview, originalWidth, originalHeight);
@@ -183,9 +181,9 @@ cameraBtn.addEventListener('click', async () => {
             cameraBtn.style.backgroundColor = '#7bdc04';
             cameraOn = true;
             preview.style.display = 'block';
+            const canvas = document.createElement('canvas');
             // Capture frame and set to preview image
             const captureFrame = () => {
-                const canvas = document.createElement('canvas');
                 canvas.width = cameraStream.videoWidth;
                 canvas.height = cameraStream.videoHeight;
                 const context = canvas.getContext('2d');
@@ -193,8 +191,16 @@ cameraBtn.addEventListener('click', async () => {
                 preview.src = canvas.toDataURL('image/webp');
             };
             preview.onload = async function () {
-                const originalWidth = Math.round(preview.clientWidth / 8) * 8;
-                const originalHeight = Math.round(preview.clientHeight / 8) * 8;
+                const originalWidth = Math.round(preview.naturalWidth / 8) * 8;
+                const originalHeight = Math.round(preview.naturalHeight / 8) * 8;
+                canvas.width = originalWidth;
+                canvas.height = originalHeight;
+                const viewWidth = window.innerWidth;
+                const viewHeight = window.innerHeight;
+                const displayWidth = preview.naturalWidth > viewWidth ? viewWidth : preview.naturalWidth;
+                const displayHeight = preview.naturalHeight > viewHeight ? viewHeight : preview.naturalHeight;
+                preview.style.width = `${displayWidth}px`;
+                preview.style.height = `${displayHeight}px`;
                 const predictions = await runModel(session, preview, originalWidth, originalHeight);
                 await displayOutputImage(predictions, originalWidth, originalHeight);
             };
