@@ -277,7 +277,12 @@ async function getSelectedCameraStream() {
         
         // 请求用户选择的摄像头流
         const stream = await navigator.mediaDevices.getUserMedia({
-            video: { deviceId: { exact: deviceId } }
+            video: { deviceId: { exact: deviceId },
+                    width: { ideal: 1280 },
+                    height: { ideal: 720 },
+                    frameRate: { ideal: 30 },
+                    facingMode: 'environment'
+                }
         });
         
         return stream;
