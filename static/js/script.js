@@ -1,5 +1,18 @@
 const modelPath = 'static/model/model_dynamic.onnx'; // Update with your model path
+const cameraBtn = document.getElementById('cameraBtn');
+const cameraStream = document.getElementById('cameraStream');
+const preview = document.getElementById('preview');
+const testInfo = document.getElementById('testInfo');
+const cameraDiv = document.getElementById('cameraDiv'); 
+let cameraOn = false;
+let stream = null;
 
+function togglecameraDiv() {
+    cameraDiv.style.display = (cameraDiv.style.display === 'none' || cameraDiv.style.display === '') ? 'block' : 'none';
+    if (cameraDiv.style.display !== 'none') {
+        populateCameraOptions();
+    }
+}
 function setupSlider(sliderId) {
     const slider = document.getElementById(sliderId);
     const imgContainer = slider.parentElement;
@@ -164,12 +177,6 @@ document.getElementById('enhanceBtn').addEventListener('click', async function (
     testInfo.innerHTML = `Inference time: ${duration.toFixed(2)}s | Image size: ${originalWidth}x${originalHeight}`; 
 });
 
-const cameraBtn = document.getElementById('cameraBtn');
-const cameraStream = document.getElementById('cameraStream');
-const preview = document.getElementById('preview');
-const testInfo = document.getElementById('testInfo');
-let cameraOn = false;
-let stream = null;
 
 cameraBtn.addEventListener('click', async () => {
     const session = await loadModel();
@@ -250,6 +257,8 @@ function createAlert(message) {
 // 获取可用摄像头设备并填充选择菜单
 async function populateCameraOptions() {
     try {
+        await navigator.mediaDevices.getUserMedia({ video: true }); // 请求用户摄像头权限
+
         // 获取所有设备信息
         const devices = await navigator.mediaDevices.enumerateDevices();
         // 过滤出视频输入设备（摄像头）
@@ -257,13 +266,23 @@ async function populateCameraOptions() {
 
         const select = document.getElementById('cameraSelect');
 
-        // 生成选项列表
-        videoDevices.forEach((device, index) => {
-            const option = document.createElement('option');
-            option.value = device.deviceId;
-            option.text = device.label || `Camera ${index + 1}`;
-            select.appendChild(option);
-        });
+         // 检查 videoDevices 是否为空
+        if (videoDevices.length > 0) {
+            // 生成选项列表
+            videoDevices.forEach((device, index) => {
+                const option = document.createElement('option');
+                option.value = device.deviceId;
+                option.text = device.label || `Camera ${index + 1}`;
+                select.appendChild(option);
+            });
+            // 启用按钮
+            cameraBtn.disabled = false;
+            select.disabled = false;
+        } else {
+            cameraBtn.disabled = true;
+            select.disabled = true;
+            console.warn("No video input devices found.");
+        }
     } catch (error) {
         console.error("Error enumerating devices:", error);
     }
@@ -274,15 +293,10 @@ async function getSelectedCameraStream() {
     try {
         const select = document.getElementById('cameraSelect');
         const deviceId = select.value;
-        
+        console.log(deviceId);
         // 请求用户选择的摄像头流
         const stream = await navigator.mediaDevices.getUserMedia({
-            video: { deviceId: { exact: deviceId },
-                    width: { ideal: 1280 },
-                    height: { ideal: 720 },
-                    frameRate: { ideal: 30 },
-                    facingMode: 'environment'
-                }
+            video: { deviceId: { exact: deviceId } }
         });
         
         return stream;
@@ -295,7 +309,7 @@ async function getSelectedCameraStream() {
 
 window.onload = function () {
     // Initialize both sliders
-    populateCameraOptions();
+    // populateCameraOptions();
     setupSlider('slider1');
     setupSlider('slider2');
     setupSlider('slider3');

@@ -193,6 +193,7 @@ h1::after {
 
     .comparison-slider {
         max-width: 100%;
+        user-select: none;
     }
 }
 

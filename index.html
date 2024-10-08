@@ -43,8 +43,8 @@
                 <div class="comparison-slider">
                     <h3>Defogging Result</h3>
                     <div class="img-container">
-                        <img src="static/img/low.png" alt="Before" class="img-before">
-                        <img src="static/img/enhance.png" alt="After" class="img-after">
+                        <img src="static/img/low.png" alt="Before" class="img-before" draggable="false">
+                        <img src="static/img/enhance.png" alt="After" class="img-after" draggable="false">
                         <div class="slider" id="slider1">
                             <div class="arrow-container">
                                 <div class="arrow left-arrow">&#10094;</div> <!-- Left arrow -->
@@ -58,8 +58,8 @@
                 <div class="comparison-slider">
                     <h3>Low Light Enhancement Result</h3>
                     <div class="img-container">
-                        <img src="static/img/enhance.png" alt="Before" class="img-before">
-                        <img src="static/img/low.png" alt="After" class="img-after">
+                        <img src="static/img/enhance.png" alt="Before" class="img-before" draggable="false">
+                        <img src="static/img/low.png" alt="After" class="img-after" draggable="false">
                         <div class="slider" id="slider2">
                             <div class="arrow-container">
                                 <div class="arrow left-arrow">&#10094;</div> <!-- Left arrow -->
@@ -70,7 +70,7 @@
                 </div>
             </div>
         </div>
-        <div class="section">
+        <div id="cameraDiv" class="section" style="display:none" >
             <h2>Online Test</h2>
             <div id="alertContainer"></div>
             <input type="file" id="imageInput" accept="image/*" />
@@ -83,8 +83,8 @@
                 <div class="comparison-slider" style="max-width: 100%; width: auto; height: auto;">
                     <h3 id="testInfo">Inference Time|Image Size</h3>
                     <div class="img-container" style="max-width: 100%; width: auto; height: auto;">
-                        <img id="preview" src="" alt="Image preview" />
-                        <canvas id="outputcanvas" alt="After" class="img-after" style="width: auto"></canvas>
+                        <img id="preview" src="" alt="Image preview" draggable="false"/>
+                        <canvas id="outputcanvas" alt="After" class="img-after" style="width: auto" draggable="false"></canvas>
                         <div class="slider" id="slider3">
                             <div class="arrow-container">
                                 <div class="arrow left-arrow">&#10094;</div> <!-- Left arrow -->
