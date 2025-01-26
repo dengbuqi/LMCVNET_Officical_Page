@@ -34,6 +34,8 @@ h1::after {
 .keywords-container {
     display: flex; /* Use flexbox for layout */
     align-items: center; /* Vertically center align items */
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
 }
 
 .keywords-label {

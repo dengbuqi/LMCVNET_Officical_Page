@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Low-cost Deep Learning Model for Real-time Surveillance Vi deo Defogging and Low Light E nhancement</title>
+    <title>A Low-cost Deep Learning Model for Real-time Low Light Image Enhancement and Defogging</title>
     <link rel="stylesheet" href="static/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.webgpu.min.js"></script>
@@ -15,7 +15,7 @@
 
 <body>
     <div class="container">
-        <h1>A Low-cost Deep Learning Model for Real-time Surveillance Vi deo Defogging and Low Light E nhancement</h1>
+        <h1>A Low-cost Deep Learning Model for Real-time Low Light Image Enhancement and Defogging</h1>
         <div class="keywords-container">
             <span class="keywords-label">Keywords:</span>
             <div class="keywords-list">
@@ -27,15 +27,16 @@
                 <span class="keyword-item">Low-cost devices</span>
             </div>
         </div>
+
         <div class="section">
             <h2>Abstract</h2>
-            <p>To achieve better visual quality in tasks such as monitoring and autonomous driving, a variety of image
-                enhancement techniques are applied to camera systems. Among these, low light enhancement and defogging
-                are hot topics in image enhancement research. In this paper, we propose a model that achieves low light
-                image enhancement and defogging with minimal computational cost, while also being capable of real-time
-                high resolution video processing. This model can be widely deployed in cost-effective autonomous driving
-                systems, surveillance equipment, and mobile devices. Our approach aims to improve visual clarity while
-                maintaining cost-efficiency.</p>
+            <p>Artificial Intelligence (AI) has redefined long-standing challenges in image processing, particularly in defogging and low-light image enhancement. The inherent flexibility and adaptability of AI technologies have significantly advanced enhancement outcomes. However, deploying state-of-the-art image enhancement models on low-power devices while maintaining real-time processing capabilities remains a critical challenge. This paper introduces a novel AI model architecture with approximately 4K parameters, developed using deep learning techniques and grounded in well-established principles such as the Atmospheric Scattering Model, Dark Channel Prior, and Local Maximum Color Value Prior. The proposed model comprises three key components: a transmission map estimation module, a color correction module,and a denoising module. Inspired by advanced concepts such as Residual Networks and Feature Pyramid Networks, the architecture achieves an optimal balance between computational efficiency and enhancement performance. Our model demonstrates competitive results in both low-light image enhancement and defogging tasks, achieving a Peak Signal-to-Noise Ratio (PSNR) exceeding 20. Furthermore, it processes 1280x720 high-definition (HD) images at an impressive speed of 0.03 seconds per frame. This remarkable processing efficiency makes the model highly suitable for deployment in high-performance, resource-constrained systems, such as home surveillance equipment and autonomous vehicle platforms.</p>
+        </div>
+        <div class="section">
+            <h2>Model Architecture</h2>
+            <div class="img-container" style="margin: 0 auto; width: 80%;">
+                <img src="static/img/Model_Arch.jpg">
+            </div>
         </div>
         <div class="section">
             <div class="comparison-container">
@@ -43,8 +44,8 @@
                 <div class="comparison-slider">
                     <h3>Defogging Result</h3>
                     <div class="img-container">
-                        <img src="static/img/low.png" alt="Before" class="img-before" draggable="false">
-                        <img src="static/img/enhance.png" alt="After" class="img-after" draggable="false">
+                        <img src="static/img/defog.jpg" alt="Before" class="img-before" draggable="false">
+                        <img src="static/img/foggy.jpg" alt="After" class="img-after" draggable="false">
                         <div class="slider" id="slider1">
                             <div class="arrow-container">
                                 <div class="arrow left-arrow">&#10094;</div> <!-- Left arrow -->
@@ -58,7 +59,7 @@
                 <div class="comparison-slider">
                     <h3>Low Light Enhancement Result</h3>
                     <div class="img-container">
-                        <img src="static/img/enhance.png" alt="Before" class="img-before" draggable="false">
+                        <img src="static/img/llie.png" alt="Before" class="img-before" draggable="false">
                         <img src="static/img/low.png" alt="After" class="img-after" draggable="false">
                         <div class="slider" id="slider2">
                             <div class="arrow-container">
@@ -70,6 +71,65 @@
                 </div>
             </div>
         </div>
+        <div class="second">
+            <h2>Experiment Results</h2>
+            <div class="img-container" style="margin: 0 auto; width: 80%;">
+                <img src="static/img/llie_res.png">
+            </div>
+            <div class="img-container" style="margin: 0 auto; width: 80%;">
+                <img src="static/img/Defog_res.png">
+            </div>
+        </div>
+        <div class="second">
+            <h2>Downstream Enhanced Results</h2>
+            <div class="img-container" style="margin: 0 auto; width: 80%;">
+                <img src="static/img/downstream_res.png">
+            </div>
+            <div class="img-container" style="margin: 0 auto; width: 80%;">
+                <img src="static/img/Exdark_res.png">
+            </div>
+            <div class="img-container" style="margin: 0 auto; width: 80%;">
+                <img src="static/img/RTTS_res.png">
+            </div>
+        </div>
+        <div class="second">
+            <h2>Conclusion</h2>
+            <p>
+                Generally, for enhanced images, when the PSNR between them and the ground truth images is 10-20, we can easily feel the difference; when the PSNR is between 20-30, we can distinguish the dif￾ference; and when the PSNR is greater than 30, it becomes very difficult for us to differentiate be￾tween the two images. In the cut-edge LLIE models and Defog models, the enhanced image is close to or even exceeds the PSNR of 30, which means the image enhancement technology has reached a level that can deceive human perception.
+            </p>
+            <p>
+                However, image enhancement still faces some challenges in real-world applications, such as real￾time image enhancement for high-quality surveillance videos and image enhancement on edge de￾vices with low computing power. Therefore, in this thesis, we propose an ultra-lightweight model of only ~4k parameters, attempting to perform Low-light image enhancement and image defogging tasks in a low computing cost environment. In this thesis, our main contributions are:
+            </p>
+            <p>
+                1. Combining the Atmosphere Scattering model and two priors: Dark Channel Prior and Local maximum color value prior, we mathematically proved that low light image en￾hancement and image defogging tasks are interconvertible, which means we can use the same AI model structure to solve both LLIE and defogging tasks.
+            </p>
+            <p>
+                2. Based on the above theory, we designed an AI model structure that can handle both LLIE and defogging tasks with training on different datasets. This model is less than 4k, but its enhancement performance is quite competitive, with PSNR > 20. Its enhancement per￾formance is significantly higher than other models of the same size.
+            </p>
+            <p>
+                3. In addition, to construct our AI model, we designed two innovative activation functions for the model: Improved Softplus activation function and Exponential and Normalized Shift activation function. These two functions help us improve the training performance of LLIE and defogging models respectively.
+            </p>
+            <p>
+                4. Finally, we conducted parallel comparisons of computational power, memory usage, inference speed, and parameter count with several outperformance models. Our proposed model has the least number of parameters, and its computational power, memory, and inference speed are also in the top 3. However, its enhancement performance is higher than the top 2 models with the least computational power, memory usage, and inference speed. Besides, it's worth mentioning that our model achieves a processing speed of about 0.03s for 1280x720 High-definition images, which means FPS > 30. This implies that our model has a huge advantage in systems with very high real-time requirements.
+            </p>
+            <p>
+                While our model has numerous advantages, it is important to acknowledge that it also faces certain limitations and challenges. These limitations provide opportunities for future improvements and refinements. Let us explore some of the key issues where our model could be enhanced:
+            </p>
+            <p>
+                1. Our low-light enhancement results may exhibit overexposure, which is related to the design of the activation function.
+            </p>
+            <p>
+                2. In the defogging task, there are still issues with processing the sky area, resulting in a lot of quantization noise. This is directly related to our choice of sky segmentation algorithm. To achieve an extremely lightweight design, our proposed model did not use a higher precision sky recognition algorithm, which led to incorrect segmentation of the sky causing the quantization noise.
+            </p>
+            <p>
+                3. The enhanced images still require more powerful color correction and denoising modules. Although color correction and denoising modules have been utilized in our proposed model, their effectiveness remains limited and exhibits some color errors. More powerful color correction and denoising modules are needed to be introduced.
+            </p>
+            <p>
+                In conclusion, our proposed model strikes an optimal balance between lightweight design and high-quality image enhancement capabilities. It serves as a benchmark for future lightweight image enhancement models. Moving forward, our research will focus on refining the model's activation functions, sky recognition algorithms, color correction techniques, and noise reduction methods to further improve our model’s image enhancement performance.
+            </p>
+        </div>
+
+
         <div id="cameraDiv" class="section" style="display:none" >
             <h2>Online Test</h2>
             <div id="alertContainer"></div>
